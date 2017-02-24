@@ -9,7 +9,7 @@ router.get('/',function(req,res){
     res.render('loginView');
 })
 
-router.post('/project', projectController.createProject);
+router.post('/', projectController.checkUser);
 
 // export router
 

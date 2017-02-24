@@ -1,4 +1,5 @@
 let Project = require('../models/Project');
+let User = require('../models/User');
 
 let projectController = {
     
@@ -27,7 +28,49 @@ let projectController = {
                 res.redirect('/');
             }
         })
+    },
+    createUser:function(req, res){
+        let user = new User(req.body);
+
+        user.save(function(err, user){
+            if(err){
+                res.send(err.message)
+                console.log(err);
+            }
+            else{
+
+                console.log(user);
+                res.redirect('/Home');
+            }
+        })
+    },
+    getAllUsers:function(req, res){
+        
+        User.find(function(err, users){
+            
+            if(err)
+                res.send(err.message);
+            else
+                res.render('HomeView', {users});
+        })
     }
+    ,
+
+     checkUser:function(req, res){
+        let user = new User(req.body);
+
+        user.find(function(err, users){
+            if(err){
+                res.send(err.message)
+                console.log(err);
+            }
+            else{
+
+                console.log(user);
+                res.render('HomeView');
+            }
+        })
+     }
 }
 
 module.exports = projectController;
