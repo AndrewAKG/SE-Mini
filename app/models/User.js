@@ -18,8 +18,11 @@ var UserSchema = mongoose.Schema({
     PassWord:{
     type :String,
     required:true
+    },  
+    Image :{
+    data:Buffer,
+    contenttype:String
     }
-
 })
 
 var User = mongoose.model("user", UserSchema);

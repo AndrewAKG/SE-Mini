@@ -53,24 +53,23 @@ let projectController = {
             else
                 res.render('HomeView', {users});
         })
-    }
-    ,
+    },
 
      checkUser:function(req, res){
-        let user = new User(req.body);
 
-        user.find(function(err, users){
-            if(err){
-                res.send(err.message)
-                console.log(err);
-            }
-            else{
-
-                console.log(user);
-                res.render('HomeView');
-            }
-        })
-     }
+       User.findOne({UserName:req.body.UserName,PassWord:req.body.PassWord},function(err,user){
+       if(err){
+        res.send(err.message);
+       }
+       else if(!user) {
+       res.send("balabizooooooo");
+       }
+       else{
+            res.redirect('/Home');
+       }
+    })
+       }
+    
 }
 
 module.exports = projectController;

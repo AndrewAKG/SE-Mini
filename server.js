@@ -1,8 +1,6 @@
 //require depenciess
 var express = require('express');
 var router = require('./app/routes');
-var router2 = require('./app/routes2');
-var router3 = require('./app/routes3')
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var DB_URI = "mongodb://localhost:27017/portfolio";
@@ -17,8 +15,6 @@ app.use(express.static(__dirname+ '/public'));
 
 mongoose.connect(DB_URI);
 app.use(router);
-app.use(router2);
-app.use(router3)
 
 // start the server
 app.listen(8080, function(){
