@@ -1,5 +1,15 @@
 var mongoose = require('mongoose');
 
+var URLsSchema = mongoose.Schema({
+    title : String ,
+    link : String
+})
+
+var ShotsSchema = mongoose.Schema({
+    title:String,
+    Pic :String
+})
+
 var UserSchema = mongoose.Schema({
     FirstName:{
         type:String,
@@ -21,7 +31,10 @@ var UserSchema = mongoose.Schema({
     },  
     Image :{
     type:String
-    }
+},
+    Links: [URLsSchema]
+    ,  
+    ScreenShots :[ShotsSchema]
 })
 
 var User = mongoose.model("user", UserSchema);

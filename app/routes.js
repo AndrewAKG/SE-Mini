@@ -1,7 +1,7 @@
 // require dependincies 
 var express = require('express');
 var router = express.Router();
-var projectController = require('./controllers/projectController');
+var UserController = require('./controllers/UserController');
 var multer = require('multer');
 //var upload = multer({ dest: './controllers/uploads'});
 var storage = multer.diskStorage({
@@ -12,8 +12,17 @@ var storage = multer.diskStorage({
         cb(null, file.originalname)
   }
 })
+var storage2 = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '/home/andrew/SE-Mini/AllinAll/ScreenShots')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+  }
+})
 
 var upload = multer({ storage: storage })
+var upload2 = multer({ storage2: storage2 })
 
 // get requests 
 //router.get('/', projectController.getAllProjects);
@@ -23,15 +32,16 @@ router.get('/',function(req,res){
 router.get('/SignUp',function(req,res){
     res.render('SignUpView');
 })
-router.get('/Home', projectController.getUser);
-router.get('/Guest',projectController.gotoGuestHome)
+router.get('/Home', UserController.getUser);
+router.get('/Guest',UserController.gotoGuestHome);
+router.get('/AddWork',UserController.gotoAddWork);
 
 //post requests
 //router.post('/SignUp', projectController.createUser);
-router.post('/SignUp',upload.single("Image"), projectController.createUser);
-router.post('/', projectController.checkUser);
-router.post('/URL',projectController.addFirstURL);
-router.post('/ScreenShot',upload.single("Image"),projectController.addFirstScreenShot);
+router.post('/SignUp',upload.single("Image"), UserController.createUser);
+router.post('/', UserController.checkUser);
+router.post('/URL',UserController.addFirstURL);
+router.post('/ScreenShot',upload2.single("Pic"),UserController.addFirstScreenShot);
 
 // export router
 

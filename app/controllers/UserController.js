@@ -1,77 +1,49 @@
-let Project = require('../models/Project');
 let User = require('../models/User');
-let Work = require('../models/Work');
 
 //var fs = require('fs');
 var userSession;
 
 
-let projectController = {
+let userController = {
     
-    getAllProjects:function(req, res){
-        
-        Project.find(function(err, projects){
-            
-            if(err)
-                res.send(err.message);
-            else
-                res.render('index', {projects});
-        })
-    },
-
-    createProject:function(req, res){
-        let project = new Project(req.body);
-
-        project.save(function(err, project){
-            if(err){
-                res.send(err.message)
-                console.log(err);
-            }
-            else{
-
-                console.log(project);
-                res.redirect('/');
-            }
-        })
-    },
+//User First Work
     addFirstURL:function(req, res){
         let userN = userSession.UserName; 
-    let work = new Work({
-    UserName : userN });
-    
-    work.Links.push(req.body);
-    
-        work.save(function(err, work){
+
+        User.findOne({UserName:userN},function(err, work){
             if(err){
                 res.send(err.message)
                 console.log(err);
             }
             else{
-
-                console.log(work);
-               // res.redirect('/Home');
+             user.Links.push(req.body);
+                console.log(req.body);
+                userSession=req.session;
+                userSession.UserName=req.body.UserName;
+                res.redirect('/Home');
             }
         })
     },
+//User First Work    
     addFirstScreenShot:function(req, res){
         let userN = userSession.UserName; 
-    let work = new Work({
-    UserName : userN });
+        let pic = req.file.originalname ;;
     
-    work.Links.push(req.body);
-    
-        work.save(function(err, work){
+        User.findOne({UserName:userN},function(err, user){
             if(err){
                 res.send(err.message)
                 console.log(err);
             }
             else{
-
-                console.log(work);
-               // res.redirect('/Home');
+          user.ScreenShots.push({title : req.body.title,Pic : pic});
+                console.log(user);
+                userSession=req.session;
+            userSession.UserName=req.body.UserName;
+                res.redirect('/Home');
             }
         })
     },
+//User SignUp
     createUser:function(req, res){
         let user = new User(req.body);
        user.Image = req.file.originalname ;
@@ -84,20 +56,35 @@ let projectController = {
                 userSession=req.session;
         userSession.UserName=req.body.UserName;     
                 console.log(user);
-                res.redirect('/');
+                res.redirect('/AddWork');
             }
         })
     },
+    gotoAddWork:function(req,res){
+        let userN = userSession.UserName; 
+        User.findOne({UserName:userN},function(err, user){
+            
+            if(err)
+                res.send(err.message);
+            else{
+             userSession=req.session;
+        userSession.UserName=req.body.UserName; 
+            res.render('HomeView',{user});
+        }    
+    })
+    },
+//User Portfolio Page
     getUser:function(req, res){
-        var user = req.body;
-        User.findOne(function(err, user){
+        let userN = userSession.UserName; 
+        User.findOne({UserName:userN},function(err, user){
             
             if(err)
                 res.send(err.message);
             else
-                res.render('HomeView', {user});
+            res.render('PortfolioPage',{user});
         })
     },
+//Guest Login
     gotoGuestHome:function(req, res){
         User.find(function(err, users){
             
@@ -107,7 +94,7 @@ let projectController = {
                 res.render('GuestHome',{users});
         })
     },
-
+//Login Check
      checkUser:function(req, res){
 
        User.findOne({UserName:req.body.UserName,PassWord:req.body.PassWord},function(err,user){
@@ -127,4 +114,4 @@ let projectController = {
     
 }
 
-module.exports = projectController;
+module.exports = userController;
