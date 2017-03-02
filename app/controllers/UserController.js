@@ -6,26 +6,25 @@ var userSession;
 
 let userController = {
     
-//User First Work
-    addFirstURL:function(req, res){
+//User Adding Links
+    addURL:function(req, res){
         let userN = userSession.UserName; 
 
-        User.findOne({UserName:userN},function(err, work){
+        User.findOne({UserName:userN},function(err, user){
             if(err){
                 res.send(err.message)
                 console.log(err);
             }
             else{
              user.Links.push(req.body);
+             user.save(function(err){});
                 console.log(req.body);
-                userSession=req.session;
-                userSession.UserName=req.body.UserName;
                 res.redirect('/Home');
             }
         })
     },
-//User First Work    
-    addFirstScreenShot:function(req, res){
+//User Adding ScreenShots  
+    addScreenShot:function(req, res){
         let userN = userSession.UserName; 
         let pic = req.file.originalname ;;
     
@@ -35,10 +34,10 @@ let userController = {
                 console.log(err);
             }
             else{
-          user.ScreenShots.push({title : req.body.title,Pic : pic});
+           user.ScreenShots.push({title : req.body.title,Pic : pic});
+           user.save(function(err){});
+
                 console.log(user);
-                userSession=req.session;
-            userSession.UserName=req.body.UserName;
                 res.redirect('/Home');
             }
         })
@@ -60,6 +59,7 @@ let userController = {
             }
         })
     },
+//User AddingWork
     gotoAddWork:function(req,res){
         let userN = userSession.UserName; 
         User.findOne({UserName:userN},function(err, user){
@@ -67,8 +67,6 @@ let userController = {
             if(err)
                 res.send(err.message);
             else{
-             userSession=req.session;
-        userSession.UserName=req.body.UserName; 
             res.render('HomeView',{user});
         }    
     })

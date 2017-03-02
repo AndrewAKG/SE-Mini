@@ -27,7 +27,7 @@ var upload2 = multer({ storage2: storage2 })
 // get requests 
 //router.get('/', projectController.getAllProjects);
 router.get('/',function(req,res){
-    res.render('loginView');
+    res.render('index2');
 })
 router.get('/SignUp',function(req,res){
     res.render('SignUpView');
@@ -40,8 +40,8 @@ router.get('/AddWork',UserController.gotoAddWork);
 //router.post('/SignUp', projectController.createUser);
 router.post('/SignUp',upload.single("Image"), UserController.createUser);
 router.post('/', UserController.checkUser);
-router.post('/URL',UserController.addFirstURL);
-router.post('/ScreenShot',upload2.single("Pic"),UserController.addFirstScreenShot);
+router.post('/URL',UserController.addURL);
+router.post('/ScreenShot',upload2.single("Pic"),UserController.addScreenShot);
 
 // export router
 
