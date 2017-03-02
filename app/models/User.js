@@ -20,8 +20,7 @@ var UserSchema = mongoose.Schema({
     required:true
     },  
     Image :{
-    data:Buffer,
-    contenttype:String
+    type:String
     }
 })
 

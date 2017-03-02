@@ -1,5 +1,10 @@
 let Project = require('../models/Project');
 let User = require('../models/User');
+let Work = require('../models/Work');
+
+//var fs = require('fs');
+var userSession;
+
 
 let projectController = {
     
@@ -29,29 +34,77 @@ let projectController = {
             }
         })
     },
-    createUser:function(req, res){
-        let user = new User(req.body);
-
-        user.save(function(err, user){
+    addFirstURL:function(req, res){
+        let userN = userSession.UserName; 
+    let work = new Work({
+    UserName : userN });
+    
+    work.Links.push(req.body);
+    
+        work.save(function(err, work){
             if(err){
                 res.send(err.message)
                 console.log(err);
             }
             else{
 
-                console.log(user);
-                res.redirect('/Home');
+                console.log(work);
+               // res.redirect('/Home');
             }
         })
     },
-    getAllUsers:function(req, res){
-        
+    addFirstScreenShot:function(req, res){
+        let userN = userSession.UserName; 
+    let work = new Work({
+    UserName : userN });
+    
+    work.Links.push(req.body);
+    
+        work.save(function(err, work){
+            if(err){
+                res.send(err.message)
+                console.log(err);
+            }
+            else{
+
+                console.log(work);
+               // res.redirect('/Home');
+            }
+        })
+    },
+    createUser:function(req, res){
+        let user = new User(req.body);
+       user.Image = req.file.originalname ;
+        user.save(function(err, user){
+            if(err){
+                res.send(err.message)
+                console.log(err);
+            }
+            else{           
+                userSession=req.session;
+        userSession.UserName=req.body.UserName;     
+                console.log(user);
+                res.redirect('/');
+            }
+        })
+    },
+    getUser:function(req, res){
+        var user = req.body;
+        User.findOne(function(err, user){
+            
+            if(err)
+                res.send(err.message);
+            else
+                res.render('HomeView', {user});
+        })
+    },
+    gotoGuestHome:function(req, res){
         User.find(function(err, users){
             
             if(err)
                 res.send(err.message);
             else
-                res.render('HomeView', {users});
+                res.render('GuestHome',{users});
         })
     },
 
@@ -65,6 +118,8 @@ let projectController = {
        res.send("balabizooooooo");
        }
        else{
+            userSession=req.session;
+            userSession.UserName=req.body.UserName;
             res.redirect('/Home');
        }
     })

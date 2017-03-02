@@ -88,15 +88,42 @@
     </style>
     </head>
 <body>
- <div class="row">
-        <div class="col-xs-12 col-md-8">
-            <div class="row">
-                <% for(var i=0; i<users.length; i++){%>
-                    <div class="card col-xs-4">
-                        <h4 class="card-title"> <%= users[i].FirstName %></h4>
-                        <a href="<%= users[i].UserName %>" class="btn btn-primary card-link">Hello 3am ba5</a>
+                <h3 style="margin-bottom:20px">Welcome , <%= user.FirstName %>  <%= user.LastName %> :D</h3>
+                <img src="profileImages/<%= user.Image %>" >
+
+                 <div class="col-xs-12 col-md-4">
+                     <div class="form-container">
+                <h3 style="margin-bottom:40px;">Add Your First Project to Create Your Portfolio</h3>
+                <form class="form" method="POST" action="/URL">
+                    <div class="form-group">
+                        <label for="InputTitle">Title</label>
+                        <input name = "title" type="text" class="form-control" id="InputTitle" placeholder="Title">
                     </div>
-                <% } %>
+                    <div class="form-group">
+                        <label for="InputLink">Link</label>
+                        <input name = "link" type="url" class="form-control" id="InputLink" placeholder="Link">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit link</button>
+                </form>
             </div>
         </div>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+                     <div class="form-container">
+                <form class="form" method="POST" action="/ScreenShot" style="margin-top:80px">
+                    <div class="form-group">
+                        <label for="InputTitle">Title</label>
+                        <input name = "title" type="text" class="form-control" id="InputTitle" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="input">ScreenShot</label>
+                        <input name = "Pic" type="file" class="form-control" id="ScreenShot">
+                    </div>
+                    <button type="submit" class="btn btn-default">Add ScreenShot</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>
 </html>
