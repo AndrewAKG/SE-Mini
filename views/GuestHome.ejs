@@ -106,7 +106,10 @@
                         <h4 class="card-title">
                             <%= Users.docs[i].UserName %>
                         </h4>
-                        <img src="profileImages/<%= Users.docs[i].Image %>" style="width: 60%;height: 50%">
+                        <img src="/profileImages/<%= Users.docs[i].Image %>" style="width: 60%;height: 50%">
+                        <h7 class="card-title">
+                          Works :
+                        </h7>
                         <% if(Users.docs[i].Links.length > 0 &&  Users.docs[i].ScreenShots.length > 0){ %>
                             <a href="<%= Users.docs[i].Links[0].link %>" class="btn btn-primary card-link">
                                 <%= Users.docs[i].Links[0].title %>
@@ -114,7 +117,7 @@
                             <h5 class="card-title">
                                 <%= Users.docs[i].ScreenShots[0].title %>
                             </h5>
-                            <img src="ScreenShots/<%= Users.docs[i].ScreenShots[0].Pic %>" style="width: 60%;height: 50%">
+                            <img src="/ScreenShots/<%= Users.docs[i].ScreenShots[0].Pic %>" style="width: 60%;height: 50%">
                             <% } %>
 
                                 <% if(Users.docs[i].Links.length == 0 &&  Users.docs[i].ScreenShots.length == 0){ %>
@@ -135,7 +138,7 @@
                                                                 <h6 class="card-title">
                                                                     <%=  Users.docs[i].ScreenShots[j].title %>
                                                                 </h6>
-                                                                <img src="ScreenShots/<%= Users.docs[i].ScreenShots[j].Pic %>" style="width: 60%;height: 50%">
+                                                                <img src="/ScreenShots/<%= Users.docs[i].ScreenShots[j].Pic %>" style="width: 60%;height: 50%">
 
                                                                 <% } %>
                                                                     <% } %>
@@ -147,7 +150,7 @@
 
     <div>
         <% for(var i=0; i<Users.pages; i++){%>
-            <a href="/Guest/<%= i+1 %>">
+            <a href="/Guest/<%= i+1 %>" style="width:150px;height:150px;margin: 10px">
                 <%= i+1 %>
             </a>
             <% } %>

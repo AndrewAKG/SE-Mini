@@ -137,23 +137,24 @@ let userController = {
                 res.render('PortfolioPage', { user });
         })
     },
-    //Guest Login
+    //Guest or Client visit FirstTime
     gotoGuestHome: function (req, res) {
-                User.paginate({}, { page:1, limit: 10 }, function (err, users) {
+        User.paginate({}, { page: 1, limit: 10 }, function (err, users) {
             if (err)
                 res.send(err.message);
             else {
-                res.render('GuestHome', { Users: users});
+                res.render('GuestHome', { Users: users });
             }
         });
     },
+    //Guest or Client visit Usually
     gotoGuestHome2: function (req, res) {
-   var currentPage = req.params.id;
-                User.paginate({}, { page: currentPage, limit: 10 }, function (err, users) {
+        var currentPage = req.params.id;
+        User.paginate({}, { page: currentPage, limit: 10 }, function (err, users) {
             if (err)
                 res.send(err.message);
             else {
-                res.render('GuestHome', { Users: users});
+                res.render('GuestHome', { Users: users });
             }
         });
     },
