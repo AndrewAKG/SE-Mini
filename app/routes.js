@@ -6,7 +6,7 @@ var multer = require('multer');
 //var upload = multer({ dest: './controllers/uploads'});
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/home/andrew/SE-Mini/AllinAll/profileImages')
+        cb(null, './AllinAll/profileImages')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
 })
 var storage2 = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/home/andrew/SE-Mini/AllinAll/ScreenShots')
+        cb(null, './AllinAll/ScreenShots')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
