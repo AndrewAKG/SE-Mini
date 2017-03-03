@@ -104,7 +104,7 @@
                 <% for(var i=0; i<Users.docs.length; i++){%>
                     <div class="card col-xs-4">
                         <h4 class="card-title">
-                            <%= Users.docs[i].UserName %>
+                            <%= Users.docs[i].FirstName %> <%= Users.docs[i].LastName %> 
                         </h4>
                         <img src="/profileImages/<%= Users.docs[i].Image %>" style="width: 60%;height: 50%;margin:20px"><br>
                         <h7 class="card-title">
