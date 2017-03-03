@@ -106,7 +106,7 @@
                         <h4 class="card-title">
                             <%= Users.docs[i].UserName %>
                         </h4>
-                        <img src="/profileImages/<%= Users.docs[i].Image %>" style="width: 60%;height: 50%">
+                        <img src="/profileImages/<%= Users.docs[i].Image %>" style="width: 60%;height: 50%;margin:20px"><br>
                         <h7 class="card-title">
                           Works :
                         </h7>
@@ -150,9 +150,9 @@
 
     <div>
         <% for(var i=0; i<Users.pages; i++){%>
-            <a href="/Guest/<%= i+1 %>" style="width:150px;height:150px;margin: 10px">
+         <font size="6">   <a href="/Guest/<%= i+1 %>" style="margin: 10px">
                 <%= i+1 %>
-            </a>
+            </a></font>
             <% } %>
     </div>
 
