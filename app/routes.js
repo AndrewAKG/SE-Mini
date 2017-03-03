@@ -34,7 +34,8 @@ router.get('/SignUp', function (req, res) {
 })
 router.get('/Home', UserController.getUser);
 router.get('/Guest', UserController.gotoGuestHome);
-router.get('/AddWork', UserController.gotoAddWork);
+router.get('/AddWork', UserController.gotoAddWorkWithin);
+router.get('/AddWorkWithout', UserController.gotoAddWorkWithout);
 
 //post requests
 //router.post('/SignUp', projectController.createUser);
@@ -42,6 +43,7 @@ router.post('/SignUp', upload.single("Image"), UserController.createUser);
 router.post('/', UserController.checkUser);
 router.post('/URL', UserController.addURL);
 router.post('/ScreenShot', upload2.single("Pic"), UserController.addScreenShot);
+router.post('/Guest',UserController.gotoGuestHome);
 
 // export router
 

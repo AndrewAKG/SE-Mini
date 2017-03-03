@@ -43,7 +43,7 @@
         .card {
             padding: 10px;
             padding-top: 20px;
-            background: #18bc9c;
+            background: darkcyan;
             border: 1px #c8c3ff solid;
             border-radius: 5px;
             text-align: center;
@@ -53,7 +53,7 @@
         }
         
         .card .card-title {
-            color: #02695e;
+            color: cornsilk;
             font-size: 2em;
             font-weight: bold;
             text-transform: capitalize;
@@ -92,26 +92,35 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <h1 class="navbar-header" style="color: aliceblue">WELCOME TO USERS PORTFOLIOS</h1>
+                <Text class="navbar-brand" style="margin-right: 800px">WELCOME TO STUDENTS PORTFOLIOS</Text>
+                <a class="navbar-brand" href="/" style="border: 0;
+            border-radius: 0">HOME PAGE</a>
             </div>
         </div>
     </nav>
     <div class="row">
         <div class="col-xs-12 col-md-8">
             <div class="row">
-                <% for(var i=0; i<users.length; i++){%>
+                <% for(var i=0; i<Users.docs.length; i++){%>
                     <div class="card col-xs-4">
                         <h4 class="card-title">
-                            <%= users[i].UserName %>
+                            <%= Users.docs[i].UserName %>
                         </h4>
-                        <% for(var j=0; j<users[i].Links.length; j++){%>
-                            <a href="<%= users[i].Links[j].link %>" class="btn btn-primary card-link">
-                                <%= users[i].Links[j].title %>
+                        <% for(var j=0; j<Users.docs[i].Links.length; j++){%>
+                            <a href="<%= Users.docs[i].Links[j].link %>" class="btn btn-primary card-link">
+                                <%= Users.docs[i].Links[j].title %>
                             </a>
                             <% } %>
                     </div>
                     <% } %>
             </div>
+        </div>
+        <div>
+            <% for(var i=0; i<Users.pages; i++){%>
+                <form method="POST" action="/Guest">
+                    <button type="submit"><%= Users.page %></button>
+                </form>
+                <% } %>
         </div>
 
 </html>

@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
+
 
 var URLsSchema = mongoose.Schema({
     title : String ,
@@ -36,6 +38,7 @@ var UserSchema = mongoose.Schema({
     ,  
     ScreenShots :[ShotsSchema]
 })
+UserSchema.plugin(mongoosePaginate);
 
 var User = mongoose.model("user", UserSchema);
 

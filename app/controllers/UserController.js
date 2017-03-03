@@ -103,8 +103,8 @@ let userController = {
             }
         }
     },
-    //User AddingWork
-    gotoAddWork: function (req, res) {
+    //User AddingWork FirstTime
+    gotoAddWorkWithin: function (req, res) {
         let userN = userSession.UserName;
         User.findOne({ UserName: userN }, function (err, user) {
 
@@ -112,6 +112,18 @@ let userController = {
                 res.send(err.message);
             else {
                 res.render('HomeView', { user, empty: 0 });
+            }
+        })
+    },
+    //User AddingWork Usually
+    gotoAddWorkWithout: function (req, res) {
+        let userN = userSession.UserName;
+        User.findOne({ UserName: userN }, function (err, user) {
+
+            if (err)
+                res.send(err.message);
+            else {
+                res.render('HomeView', { user, empty: 3 });
             }
         })
     },
@@ -128,13 +140,19 @@ let userController = {
     },
     //Guest Login
     gotoGuestHome: function (req, res) {
-        User.find(function (err, users) {
-
+        User.paginate({}, { page: 1, limit: 10 }, function (err, users) {
             if (err)
                 res.send(err.message);
-            else
-                res.render('GuestHome', { users });
-        })
+            else{
+                console.log(users.pages)
+                res.render('GuestHome', { Users: users });
+            }
+            // result.docs
+            // result.total
+            // result.limit - 10
+            // result.page - 3
+            // result.pages
+        });
     },
     //Login Check
     checkUser: function (req, res) {
