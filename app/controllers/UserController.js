@@ -3,7 +3,6 @@ let User = require('../models/User');
 //var fs = require('fs');
 var userSession;
 
-
 let userController = {
 
     //User Adding Links
@@ -140,18 +139,22 @@ let userController = {
     },
     //Guest Login
     gotoGuestHome: function (req, res) {
-        User.paginate({}, { page: 1, limit: 10 }, function (err, users) {
+                User.paginate({}, { page:1, limit: 10 }, function (err, users) {
             if (err)
                 res.send(err.message);
-            else{
-                console.log(users.pages)
-                res.render('GuestHome', { Users: users });
+            else {
+                res.render('GuestHome', { Users: users});
             }
-            // result.docs
-            // result.total
-            // result.limit - 10
-            // result.page - 3
-            // result.pages
+        });
+    },
+    gotoGuestHome2: function (req, res) {
+   var currentPage = req.params.id;
+                User.paginate({}, { page: currentPage, limit: 10 }, function (err, users) {
+            if (err)
+                res.send(err.message);
+            else {
+                res.render('GuestHome', { Users: users});
+            }
         });
     },
     //Login Check

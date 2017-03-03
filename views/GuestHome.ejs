@@ -48,8 +48,8 @@
             border-radius: 5px;
             text-align: center;
             margin: 10px 3% 1% 3%;
-            height: calc(80% * (1/3));
-            width: calc(80% * (1/3));
+            height: calc(80% * (2/3));
+            width: calc(80% * (2/3));
         }
         
         .card .card-title {
@@ -106,21 +106,45 @@
                         <h4 class="card-title">
                             <%= Users.docs[i].UserName %>
                         </h4>
-                        <% for(var j=0; j<Users.docs[i].Links.length; j++){%>
-                            <a href="<%= Users.docs[i].Links[j].link %>" class="btn btn-primary card-link">
-                                <%= Users.docs[i].Links[j].title %>
+                        <img src="profileImages/<%= Users.docs[i].Image %>" style="width: 60%;height: 50%">
+                        <% if(Users.docs[i].Links.length > 0 &&  Users.docs[i].ScreenShots.length > 0){ %>
+                            <a href="<%= Users.docs[i].Links[0].link %>" class="btn btn-primary card-link">
+                                <%= Users.docs[i].Links[0].title %>
                             </a>
+                            <img src="ScreenShots/<%= Users.docs[i].ScreenShots[0] %>">
                             <% } %>
+
+                                <% if(Users.docs[i].Links.length == 0 &&  Users.docs[i].ScreenShots.length == 0){ %>
+
+                                    <Text>There is no Work to Show</Text>
+                                    <% } %>
+                                        <% if(Users.docs[i].Links.length > 0 &&  Users.docs[i].ScreenShots.length == 0){ %>
+
+                                            <% for(var j=0; j<Users.docs[i].Links.length; j++){%>
+                                                <a href="<%= Users.docs[i].Links[j].link %>" class="btn btn-primary card-link">
+                                                    <%= Users.docs[i].Links[j].title %>
+                                                </a>
+                                                <% } %>
+                                                    <% } %>
+                                                        <% if(Users.docs[i].Links.length == 0 &&  Users.docs[i].ScreenShots.length > 0){ %>
+
+                                                            <% for(var j=0; j<Users.docs[i].ScreenShots.length; j++){%>
+                                                                <img src="ScreenShots/<%= Users.docs[i].ScreenShots[j] %>">
+
+                                                                <% } %>
+                                                                    <% } %>                                             
                     </div>
-                    <% } %>
+                     <% } %>
             </div>
         </div>
-        <div>
-            <% for(var i=0; i<Users.pages; i++){%>
-                <form method="POST" action="/Guest">
-                    <button type="submit"><%= Users.page %></button>
-                </form>
-                <% } %>
-        </div>
+    </div>
+    
+    <div>
+        <% for(var i=0; i<Users.pages; i++){%>
+            <a href="/Guest/<%= i+1 %>">
+                <%= i+1 %>
+            </a>
+            <% } %>
+    </div>
 
 </html>

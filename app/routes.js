@@ -34,6 +34,7 @@ router.get('/SignUp', function (req, res) {
 })
 router.get('/Home', UserController.getUser);
 router.get('/Guest', UserController.gotoGuestHome);
+router.get('/Guest/:id',UserController.gotoGuestHome2);
 router.get('/AddWork', UserController.gotoAddWorkWithin);
 router.get('/AddWorkWithout', UserController.gotoAddWorkWithout);
 
@@ -43,7 +44,7 @@ router.post('/SignUp', upload.single("Image"), UserController.createUser);
 router.post('/', UserController.checkUser);
 router.post('/URL', UserController.addURL);
 router.post('/ScreenShot', upload2.single("Pic"), UserController.addScreenShot);
-router.post('/Guest',UserController.gotoGuestHome);
+
 
 // export router
 
