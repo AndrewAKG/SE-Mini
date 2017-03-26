@@ -20,3 +20,4 @@ The projects is divided in 4 parts. each part has his own branch
 - [Html rendering](https://github.com/alihassan0/NodeTutorial/tree/part4)
 
 > a tutorial is in the making to be realease soon Hopefully.  
+Deployment IP : 52.24.135.34:8080
